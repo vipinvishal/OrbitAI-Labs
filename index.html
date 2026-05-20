@@ -669,11 +669,24 @@
     text-align: center;
   }
   .mobile-nav-cta:hover { background: var(--blue); color: #000; }
+  .mobile-nav-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .mobile-nav-close:hover { color: var(--white); }
   .mobile-nav-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.75);
     z-index: 140;
     opacity: 0;
     transition: opacity 0.35s;
@@ -770,6 +783,14 @@
   /* ── RESPONSIVE — Mobile (≤ 480px) ── */
   @media (max-width: 480px) {
     nav { height: 60px; padding: 0 16px; }
+
+    /* Full-screen nav drawer on phones */
+    .mobile-nav {
+      width: 100%;
+      border-left: none;
+      padding: 80px 28px 40px;
+      align-items: flex-start;
+    }
 
     .hero { padding: 84px 16px 44px; }
 
@@ -966,6 +987,7 @@
 <!-- Mobile nav overlay + drawer -->
 <div class="mobile-nav-overlay" id="navOverlay"></div>
 <nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&#x2715;</button>
   <ul>
     <li><a href="#">Products</a></li>
     <li><a href="#">Extensions</a></li>
@@ -1209,7 +1231,8 @@
   }
   hamburger.addEventListener('click', () => mobileNav.classList.contains('open') ? closeMenu() : openMenu());
   navOverlay.addEventListener('click', closeMenu);
-  mobileNav.querySelectorAll('a, button').forEach(el => el.addEventListener('click', closeMenu));
+  document.getElementById('mobileNavClose').addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a, .mobile-nav-cta').forEach(el => el.addEventListener('click', closeMenu));
 
   // ── Custom cursor (desktop only) ──
   const cursor = document.getElementById('cursor');
