@@ -21,7 +21,7 @@
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     background: var(--dark);
@@ -693,7 +693,7 @@
   }
   .mobile-nav-overlay.open { opacity: 1; }
 
-  /* ── RESPONSIVE — Laptop (≤ 1024px) ── */
+  /* ── RESPONSIVE — Laptop (769–1024px) ── */
   @media (max-width: 1024px) {
     nav { padding: 0 28px; height: 80px; }
     .nav-links { gap: 20px; }
@@ -704,165 +704,192 @@
     footer { padding: 36px 32px; }
   }
 
-  /* ── RESPONSIVE — Tablet (≤ 768px) ── */
+  /* ── RESPONSIVE — Tablet (481–768px) ── */
   @media (max-width: 768px) {
+    /* Cursor */
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
-    .btn-primary, .btn-ghost, .product-tag, .nav-cta { cursor: pointer; }
+    a, button, .product-tag { cursor: pointer; }
 
-    nav { padding: 0 20px; height: 68px; }
+    /* Nav */
+    nav { padding: 0 20px; height: 64px; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
     .hamburger { display: flex; }
     .mobile-nav { display: flex; }
     .mobile-nav-overlay { display: block; }
 
-    .hero { padding: 96px 24px 56px; }
+    /* Hero */
+    .hero { padding: 88px 20px 52px; }
     .hero-content { max-width: 100%; width: 100%; }
+    .hero-logo-large { width: 100%; margin-bottom: 24px; }
 
-    /* Make hero SVG logo fluid */
-    .hero-logo-large { width: 100%; display: flex; justify-content: center; }
-    .hero-logo-large svg { width: 80%; max-width: 340px; height: auto; }
-
-    /* Badge: allow wrap, tighten spacing */
+    /* Badge — switch to block so it constrains to parent width */
     .hero-badge {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      padding: 7px 14px;
-      max-width: 100%;
-      text-align: center;
-      white-space: normal;
-      line-height: 1.6;
-    }
-
-    /* Title: reduce letter-spacing to prevent overflow */
-    .hero-title { letter-spacing: 2px; }
-    .hero-title .line2 { letter-spacing: 5px; font-size: clamp(28px, 5vw, 56px); }
-
-    /* Sub: full width */
-    .hero-sub { max-width: 100%; }
-
-    /* Stats: 2×2 grid, clean borders */
-    .hero-stats {
+      display: flex;
       flex-wrap: wrap;
-      margin-top: 56px;
+      justify-content: center;
       width: 100%;
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 8px 14px;
+      line-height: 1.7;
+      text-align: center;
+      margin-bottom: 28px;
     }
-    .stat {
-      flex: 0 0 50%;
-      max-width: 50%;
-      border-right: none !important;
+
+    /* Title */
+    .hero-title {
+      font-size: clamp(26px, 5.5vw, 52px);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .hero-title .line2 {
+      font-size: clamp(22px, 4.8vw, 46px);
+      letter-spacing: 4px;
+    }
+
+    /* Sub */
+    .hero-sub { max-width: 100%; font-size: 14px; margin-bottom: 32px; }
+
+    /* Buttons */
+    .hero-actions { gap: 12px; }
+
+    /* Stats — CSS grid, no more flex hacks */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      margin-top: 52px;
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .stat:last-child { border-bottom: none; border-right: none !important; }
+    .stat {
+      flex: unset;
+      max-width: unset;
+      border-right: none;
+      border-bottom: none;
+      padding: 24px 16px;
+    }
+    /* Top row gets bottom border */
     .stat:nth-child(1),
-    .stat:nth-child(3) { border-right: 1px solid var(--border) !important; }
-    .stat:nth-child(3),
-    .stat:nth-child(4) { border-bottom: none; }
+    .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+    /* Left column gets right border */
+    .stat:nth-child(1),
+    .stat:nth-child(3) { border-right: 1px solid var(--border); }
+    /* Remove the desktop :last-child rule */
+    .stat:last-child { border-right: none; }
 
-    .features { padding: 60px 24px; }
+    /* Features */
+    .features { padding: 60px 20px; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .feature-title { font-size: 15px; letter-spacing: 1.5px; }
+    .feature-desc { font-size: 13px; }
 
-    .products { padding: 36px 24px; }
-    .products-inner { flex-direction: column; align-items: flex-start; gap: 18px; }
+    /* Products */
+    .products { padding: 36px 20px; }
+    .products-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
     .products-line { display: none; }
     .product-tags { gap: 10px; }
 
-    .cta-section { padding: 80px 24px; }
-    .cta-title { letter-spacing: 2px; }
+    /* CTA */
+    .cta-section { padding: 80px 20px; }
+    .cta-title { font-size: clamp(26px, 5vw, 48px); letter-spacing: 2px; }
 
-    footer { padding: 30px 24px; flex-direction: column; align-items: flex-start; gap: 14px; }
+    /* Footer */
+    footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
 
-    .orbit-bg         { width: 380px; height: 380px; }
-    .orbit-bg-2       { width: 260px; height: 260px; }
-    .orbit-bg-3       { width: 500px; height: 500px; }
-    .orbit-dot-wrapper { width: 380px; height: 380px; }
+    /* Orbit rings */
+    .orbit-bg          { width: 360px; height: 360px; }
+    .orbit-bg-2        { width: 250px; height: 250px; }
+    .orbit-bg-3        { width: 480px; height: 480px; }
+    .orbit-dot-wrapper { width: 360px; height: 360px; }
   }
 
   /* ── RESPONSIVE — Mobile (≤ 480px) ── */
   @media (max-width: 480px) {
-    nav { height: 60px; padding: 0 16px; }
+    /* Nav */
+    nav { height: 58px; padding: 0 16px; }
 
-    /* Full-screen nav drawer on phones */
+    /* Full-screen drawer on phones */
     .mobile-nav {
       width: 100%;
       border-left: none;
-      padding: 80px 28px 40px;
-      align-items: flex-start;
+      padding: 76px 28px 40px;
     }
 
-    .hero { padding: 84px 16px 44px; }
+    /* Hero */
+    .hero { padding: 78px 16px 40px; }
 
-    /* Hero logo scales down more */
-    .hero-logo-large svg { width: 75%; max-width: 240px; }
-
-    /* Badge wraps cleanly */
+    /* Badge: smaller text, still wraps */
     .hero-badge {
       font-size: 9px;
-      letter-spacing: 1px;
-      padding: 6px 12px;
+      letter-spacing: 0.8px;
+      padding: 7px 12px;
       gap: 6px;
+      margin-bottom: 22px;
     }
 
-    /* Tighter title spacing on narrow screens */
+    /* Title: significantly smaller + tighter spacing */
     .hero-title {
-      font-size: clamp(28px, 7vw, 44px);
-      letter-spacing: 1.5px;
-      margin-bottom: 18px;
+      font-size: clamp(22px, 6.5vw, 34px);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
     }
     .hero-title .line2 {
-      font-size: clamp(24px, 6.5vw, 40px);
-      letter-spacing: 3px;
+      font-size: clamp(20px, 6vw, 30px);
+      letter-spacing: 2px;
     }
 
-    .hero-sub { font-size: 14px; margin-bottom: 32px; }
+    /* Sub */
+    .hero-sub { font-size: 13px; line-height: 1.7; margin-bottom: 28px; }
 
-    /* Full-width stacked buttons */
-    .hero-actions { flex-direction: column; width: 100%; gap: 12px; }
+    /* Buttons — full width stacked */
+    .hero-actions { flex-direction: column; width: 100%; gap: 10px; }
     .btn-primary,
     .btn-ghost {
       width: 100%;
       text-align: center;
-      padding: 14px 16px;
-      font-size: 13px;
+      padding: 13px 16px;
+      font-size: 12px;
       letter-spacing: 2px;
     }
 
     /* Stats */
-    .hero-stats { margin-top: 40px; }
-    .stat { padding: 18px 10px; }
-    .stat-num { font-size: 24px; letter-spacing: 1px; }
-    .stat-label { font-size: 9px; letter-spacing: 1.5px; }
+    .hero-stats { margin-top: 36px; }
+    .stat { padding: 18px 8px; }
+    .stat-num { font-size: 22px; letter-spacing: 1px; }
+    .stat-label { font-size: 8px; letter-spacing: 1.5px; }
 
     /* Features */
     .features { padding: 48px 16px; }
     .features-grid { grid-template-columns: 1fr; }
-    .feature-card { padding: 28px 20px; }
-    .feature-title { font-size: 15px; letter-spacing: 1.5px; }
-    .section-eyebrow { font-size: 9px; }
-    .section-title { letter-spacing: 1.5px; margin-bottom: 32px; }
+    .feature-card { padding: 28px 18px; }
+    .feature-title { font-size: 14px; letter-spacing: 1.5px; }
+    .section-eyebrow { font-size: 9px; letter-spacing: 4px; }
+    .section-title { font-size: clamp(22px, 6vw, 32px); letter-spacing: 1px; margin-bottom: 28px; }
 
     /* Products */
     .products { padding: 32px 16px; }
-    .product-tag { font-size: 11px; letter-spacing: 1.5px; padding: 7px 14px; }
+    .product-tag { font-size: 10px; letter-spacing: 1.5px; padding: 7px 12px; }
 
     /* CTA */
     .cta-section { padding: 56px 16px; }
-    .cta-title { font-size: clamp(26px, 7vw, 40px); letter-spacing: 1.5px; }
-    .cta-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+    .cta-title { font-size: clamp(22px, 6.5vw, 34px); letter-spacing: 1px; }
+    .cta-sub { font-size: 13px; }
+    .cta-actions { flex-direction: column; align-items: stretch; gap: 10px; }
     .cta-actions .btn-primary,
     .cta-actions .btn-ghost { width: 100%; text-align: center; }
 
     /* Footer */
-    footer { padding: 28px 16px; gap: 12px; }
+    footer { padding: 24px 16px; gap: 10px; }
     .footer-copy { font-size: 10px; }
 
-    /* Orbit rings smaller */
-    .orbit-bg         { width: 280px; height: 280px; }
-    .orbit-bg-2       { width: 190px; height: 190px; }
-    .orbit-bg-3       { width: 370px; height: 370px; }
-    .orbit-dot-wrapper { width: 280px; height: 280px; }
+    /* Orbit rings */
+    .orbit-bg          { width: 260px; height: 260px; }
+    .orbit-bg-2        { width: 180px; height: 180px; }
+    .orbit-bg-3        { width: 350px; height: 350px; }
+    .orbit-dot-wrapper { width: 260px; height: 260px; }
   }
 
   /* ── ORBITAI LABS LOGO COMPONENT ── */
@@ -1019,8 +1046,8 @@
     </div>
 
     <!-- Logo large — built natively with HTML+CSS+SVG -->
-    <div class="hero-logo-large" style="display:flex;justify-content:center;">
-      <svg width="460" height="174" viewBox="80 110 640 310" xmlns="http://www.w3.org/2000/svg">
+    <div class="hero-logo-large">
+      <svg viewBox="80 110 640 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:460px;height:auto;display:block;margin:0 auto;">
         <defs>
           <linearGradient id="arcHero" x1="200" y1="0" x2="600" y2="0" gradientUnits="userSpaceOnUse">
             <stop offset="0%"   stop-color="#00A3FF" stop-opacity="0"/>
