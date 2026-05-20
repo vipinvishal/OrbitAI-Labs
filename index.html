@@ -597,21 +597,183 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── RESPONSIVE ── */
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0; right: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(8,12,18,0.98);
+    backdrop-filter: blur(24px);
+    border-left: 1px solid var(--border);
+    z-index: 150;
+    flex-direction: column;
+    padding: 96px 32px 40px;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .mobile-nav.open { transform: translateX(0); }
+  .mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .mobile-nav ul a {
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 400;
+  }
+  .mobile-nav ul a:hover { color: var(--white); }
+  .mobile-nav-cta {
+    border: 1px solid var(--blue);
+    background: transparent;
+    color: var(--blue);
+    padding: 12px 24px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .mobile-nav-cta:hover { background: var(--blue); color: #000; }
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 140;
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .mobile-nav-overlay.open { opacity: 1; }
+
+  /* ── RESPONSIVE — Laptop (≤ 1024px) ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 28px; height: 80px; }
+    .nav-links { gap: 22px; }
+    .nav-links a { font-size: 12px; }
+    .hero { padding: 110px 32px 80px; }
+    .features { padding: 80px 32px; }
+    .cta-section { padding: 100px 32px; }
+    footer { padding: 36px 32px; }
+  }
+
+  /* ── RESPONSIVE — Tablet (≤ 768px) ── */
   @media (max-width: 768px) {
-    nav { padding: 0 20px; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+
+    nav { padding: 0 20px; height: 72px; }
     .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-nav { display: flex; }
+    .mobile-nav-overlay { display: block; }
+
     .hero { padding: 100px 20px 60px; }
+    .hero-content { max-width: 100%; }
+    .hero-logo-large { width: 100%; }
+    .hero-logo-large svg { width: 100%; max-width: 360px; height: auto; }
+
+    .hero-stats {
+      flex-wrap: wrap;
+      margin-top: 60px;
+      width: 100%;
+      max-width: 480px;
+    }
+    .stat {
+      flex: 0 0 50%;
+      max-width: 50%;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat:nth-child(odd)  { border-right: 1px solid var(--border); }
+    .stat:nth-child(3),
+    .stat:nth-child(4)    { border-bottom: none; }
+
     .features { padding: 60px 20px; }
-    .features-grid { grid-template-columns: 1fr; }
-    .hero-stats { flex-wrap: wrap; }
-    .stat { min-width: 140px; }
-    footer { padding: 30px 20px; flex-direction: column; align-items: flex-start; }
-    .orbit-bg { width: 400px; height: 400px; }
-    .orbit-bg-2 { width: 280px; height: 280px; }
-    .orbit-bg-3 { width: 550px; height: 550px; }
-    .orbit-dot-wrapper { width: 400px; height: 400px; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .products { padding: 40px 20px; }
+    .products-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .products-line { display: none; }
+    .product-tags { gap: 10px; }
+
     .cta-section { padding: 80px 20px; }
+
+    footer { padding: 30px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+
+    .orbit-bg         { width: 420px; height: 420px; }
+    .orbit-bg-2       { width: 290px; height: 290px; }
+    .orbit-bg-3       { width: 560px; height: 560px; }
+    .orbit-dot-wrapper { width: 420px; height: 420px; }
+  }
+
+  /* ── RESPONSIVE — Mobile (≤ 480px) ── */
+  @media (max-width: 480px) {
+    nav { height: 64px; padding: 0 16px; }
+
+    .hero { padding: 88px 16px 48px; }
+    .hero-logo-large svg { max-width: 260px; }
+    .hero-badge { font-size: 9px; letter-spacing: 1.5px; padding: 6px 12px; }
+
+    .hero-actions { flex-direction: column; width: 100%; }
+    .btn-primary,
+    .btn-ghost { width: 100%; text-align: center; padding: 14px 20px; }
+
+    .features { padding: 48px 16px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card { padding: 28px 20px; }
+    .section-title { margin-bottom: 36px; }
+
+    .stat { padding: 20px 12px; }
+    .stat-num { font-size: 26px; }
+    .hero-stats { margin-top: 48px; }
+
+    .cta-section { padding: 60px 16px; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .cta-actions .btn-primary,
+    .cta-actions .btn-ghost { width: 100%; text-align: center; }
+
+    footer { padding: 28px 16px; }
+
+    .orbit-bg         { width: 300px; height: 300px; }
+    .orbit-bg-2       { width: 210px; height: 210px; }
+    .orbit-bg-3       { width: 400px; height: 400px; }
+    .orbit-dot-wrapper { width: 300px; height: 300px; }
   }
 
   /* ── ORBITAI LABS LOGO COMPONENT ── */
@@ -728,6 +890,22 @@
   </ul>
 
   <button class="nav-cta">Get Started</button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav overlay + drawer -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Extensions</a></li>
+    <li><a href="#">Mobile Apps</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="mobile-nav-cta">Get Started</button>
 </nav>
 
 <!-- ── HERO ── -->
@@ -944,9 +1122,35 @@
 </footer>
 
 <script>
-  // ── Custom cursor ──
+  // ── Hamburger menu ──
+  const hamburger  = document.getElementById('hamburger');
+  const mobileNav  = document.getElementById('mobileNav');
+  const navOverlay = document.getElementById('navOverlay');
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileNav.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => mobileNav.classList.contains('open') ? closeMenu() : openMenu());
+  navOverlay.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a, button').forEach(el => el.addEventListener('click', closeMenu));
+
+  // ── Custom cursor (desktop only) ──
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursorRing');
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (isTouch) {
+    cursor.style.display = 'none';
+    ring.style.display = 'none';
+  }
   let mx = 0, my = 0, rx = 0, ry = 0;
 
   document.addEventListener('mousemove', e => {
