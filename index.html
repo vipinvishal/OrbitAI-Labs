@@ -683,7 +683,7 @@
   /* ── RESPONSIVE — Laptop (≤ 1024px) ── */
   @media (max-width: 1024px) {
     nav { padding: 0 28px; height: 80px; }
-    .nav-links { gap: 22px; }
+    .nav-links { gap: 20px; }
     .nav-links a { font-size: 12px; }
     .hero { padding: 110px 32px 80px; }
     .features { padding: 80px 32px; }
@@ -695,85 +695,153 @@
   @media (max-width: 768px) {
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
+    .btn-primary, .btn-ghost, .product-tag, .nav-cta { cursor: pointer; }
 
-    nav { padding: 0 20px; height: 72px; }
+    nav { padding: 0 20px; height: 68px; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
     .hamburger { display: flex; }
     .mobile-nav { display: flex; }
     .mobile-nav-overlay { display: block; }
 
-    .hero { padding: 100px 20px 60px; }
-    .hero-content { max-width: 100%; }
-    .hero-logo-large { width: 100%; }
-    .hero-logo-large svg { width: 100%; max-width: 360px; height: auto; }
+    .hero { padding: 96px 24px 56px; }
+    .hero-content { max-width: 100%; width: 100%; }
 
+    /* Make hero SVG logo fluid */
+    .hero-logo-large { width: 100%; display: flex; justify-content: center; }
+    .hero-logo-large svg { width: 80%; max-width: 340px; height: auto; }
+
+    /* Badge: allow wrap, tighten spacing */
+    .hero-badge {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      padding: 7px 14px;
+      max-width: 100%;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.6;
+    }
+
+    /* Title: reduce letter-spacing to prevent overflow */
+    .hero-title { letter-spacing: 2px; }
+    .hero-title .line2 { letter-spacing: 5px; font-size: clamp(28px, 5vw, 56px); }
+
+    /* Sub: full width */
+    .hero-sub { max-width: 100%; }
+
+    /* Stats: 2×2 grid, clean borders */
     .hero-stats {
       flex-wrap: wrap;
-      margin-top: 60px;
+      margin-top: 56px;
       width: 100%;
-      max-width: 480px;
     }
     .stat {
       flex: 0 0 50%;
       max-width: 50%;
-      border-right: none;
+      border-right: none !important;
       border-bottom: 1px solid var(--border);
     }
-    .stat:nth-child(odd)  { border-right: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; border-right: none !important; }
+    .stat:nth-child(1),
+    .stat:nth-child(3) { border-right: 1px solid var(--border) !important; }
     .stat:nth-child(3),
-    .stat:nth-child(4)    { border-bottom: none; }
+    .stat:nth-child(4) { border-bottom: none; }
 
-    .features { padding: 60px 20px; }
+    .features { padding: 60px 24px; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .feature-title { font-size: 15px; letter-spacing: 1.5px; }
 
-    .products { padding: 40px 20px; }
-    .products-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .products { padding: 36px 24px; }
+    .products-inner { flex-direction: column; align-items: flex-start; gap: 18px; }
     .products-line { display: none; }
     .product-tags { gap: 10px; }
 
-    .cta-section { padding: 80px 20px; }
+    .cta-section { padding: 80px 24px; }
+    .cta-title { letter-spacing: 2px; }
 
-    footer { padding: 30px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { padding: 30px 24px; flex-direction: column; align-items: flex-start; gap: 14px; }
 
-    .orbit-bg         { width: 420px; height: 420px; }
-    .orbit-bg-2       { width: 290px; height: 290px; }
-    .orbit-bg-3       { width: 560px; height: 560px; }
-    .orbit-dot-wrapper { width: 420px; height: 420px; }
+    .orbit-bg         { width: 380px; height: 380px; }
+    .orbit-bg-2       { width: 260px; height: 260px; }
+    .orbit-bg-3       { width: 500px; height: 500px; }
+    .orbit-dot-wrapper { width: 380px; height: 380px; }
   }
 
   /* ── RESPONSIVE — Mobile (≤ 480px) ── */
   @media (max-width: 480px) {
-    nav { height: 64px; padding: 0 16px; }
+    nav { height: 60px; padding: 0 16px; }
 
-    .hero { padding: 88px 16px 48px; }
-    .hero-logo-large svg { max-width: 260px; }
-    .hero-badge { font-size: 9px; letter-spacing: 1.5px; padding: 6px 12px; }
+    .hero { padding: 84px 16px 44px; }
 
-    .hero-actions { flex-direction: column; width: 100%; }
+    /* Hero logo scales down more */
+    .hero-logo-large svg { width: 75%; max-width: 240px; }
+
+    /* Badge wraps cleanly */
+    .hero-badge {
+      font-size: 9px;
+      letter-spacing: 1px;
+      padding: 6px 12px;
+      gap: 6px;
+    }
+
+    /* Tighter title spacing on narrow screens */
+    .hero-title {
+      font-size: clamp(28px, 7vw, 44px);
+      letter-spacing: 1.5px;
+      margin-bottom: 18px;
+    }
+    .hero-title .line2 {
+      font-size: clamp(24px, 6.5vw, 40px);
+      letter-spacing: 3px;
+    }
+
+    .hero-sub { font-size: 14px; margin-bottom: 32px; }
+
+    /* Full-width stacked buttons */
+    .hero-actions { flex-direction: column; width: 100%; gap: 12px; }
     .btn-primary,
-    .btn-ghost { width: 100%; text-align: center; padding: 14px 20px; }
+    .btn-ghost {
+      width: 100%;
+      text-align: center;
+      padding: 14px 16px;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
 
+    /* Stats */
+    .hero-stats { margin-top: 40px; }
+    .stat { padding: 18px 10px; }
+    .stat-num { font-size: 24px; letter-spacing: 1px; }
+    .stat-label { font-size: 9px; letter-spacing: 1.5px; }
+
+    /* Features */
     .features { padding: 48px 16px; }
     .features-grid { grid-template-columns: 1fr; }
     .feature-card { padding: 28px 20px; }
-    .section-title { margin-bottom: 36px; }
+    .feature-title { font-size: 15px; letter-spacing: 1.5px; }
+    .section-eyebrow { font-size: 9px; }
+    .section-title { letter-spacing: 1.5px; margin-bottom: 32px; }
 
-    .stat { padding: 20px 12px; }
-    .stat-num { font-size: 26px; }
-    .hero-stats { margin-top: 48px; }
+    /* Products */
+    .products { padding: 32px 16px; }
+    .product-tag { font-size: 11px; letter-spacing: 1.5px; padding: 7px 14px; }
 
-    .cta-section { padding: 60px 16px; }
-    .cta-actions { flex-direction: column; align-items: center; }
+    /* CTA */
+    .cta-section { padding: 56px 16px; }
+    .cta-title { font-size: clamp(26px, 7vw, 40px); letter-spacing: 1.5px; }
+    .cta-actions { flex-direction: column; align-items: stretch; gap: 12px; }
     .cta-actions .btn-primary,
     .cta-actions .btn-ghost { width: 100%; text-align: center; }
 
-    footer { padding: 28px 16px; }
+    /* Footer */
+    footer { padding: 28px 16px; gap: 12px; }
+    .footer-copy { font-size: 10px; }
 
-    .orbit-bg         { width: 300px; height: 300px; }
-    .orbit-bg-2       { width: 210px; height: 210px; }
-    .orbit-bg-3       { width: 400px; height: 400px; }
-    .orbit-dot-wrapper { width: 300px; height: 300px; }
+    /* Orbit rings smaller */
+    .orbit-bg         { width: 280px; height: 280px; }
+    .orbit-bg-2       { width: 190px; height: 190px; }
+    .orbit-bg-3       { width: 370px; height: 370px; }
+    .orbit-dot-wrapper { width: 280px; height: 280px; }
   }
 
   /* ── ORBITAI LABS LOGO COMPONENT ── */
