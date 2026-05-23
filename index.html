@@ -881,6 +881,146 @@
     .orbit-dot-wrapper { width: 260px; height: 260px; }
   }
 
+  /* ── WEB APPLICATIONS SECTION ── */
+  .web-apps {
+    padding: 100px 40px;
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .web-apps-inner { max-width: 1200px; margin: 0 auto; }
+
+  .product-showcase {
+    margin-top: 56px;
+    border: 1px solid var(--border);
+    background: var(--dark3);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .product-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  }
+
+  .ps-left {
+    padding: 52px 48px;
+    border-right: 1px solid var(--border);
+  }
+  .ps-right {
+    padding: 52px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ps-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #00e676;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .ps-live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #00e676;
+    box-shadow: 0 0 8px #00e676;
+    animation: pulse 2s ease infinite;
+  }
+
+  .ps-name {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: 5px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .ps-tagline {
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .ps-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 32px;
+  }
+  .ps-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .ps-pill {
+    border: 1px solid var(--border);
+    padding: 5px 14px;
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--blue-light);
+    text-transform: uppercase;
+  }
+  .ps-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--blue);
+    color: #000;
+    padding: 13px 28px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .ps-cta:hover { background: var(--blue-light); box-shadow: 0 0 28px rgba(0,153,255,0.35); transform: translateY(-2px); }
+
+  .ps-feature {
+    padding: 20px 20px 20px 22px;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.25s;
+    background: rgba(0,153,255,0.02);
+  }
+  .ps-feature:hover { border-left-color: var(--blue); background: rgba(0,153,255,0.05); }
+  .ps-feature-title {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .ps-feature-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
+
+  @media (max-width: 768px) {
+    .web-apps { padding: 60px 20px; }
+    .product-showcase { grid-template-columns: 1fr; }
+    .ps-left { padding: 36px 28px; border-right: none; border-bottom: 1px solid var(--border); }
+    .ps-right { padding: 36px 28px; }
+  }
+  @media (max-width: 480px) {
+    .web-apps { padding: 48px 16px; }
+    .ps-left, .ps-right { padding: 28px 20px; }
+    .ps-name { font-size: 28px; letter-spacing: 3px; }
+  }
+
   /* ── ORBITAI LABS LOGO COMPONENT ── */
   .oal {
     --w: 220px;          /* total logo width */
@@ -1162,6 +1302,60 @@
       <div class="feature-desc">Full-featured web apps powered by the latest AI. No installs needed — open your browser and start working smarter immediately.</div>
     </div>
 
+  </div>
+</section>
+
+<!-- ── WEB APPLICATIONS ── -->
+<section class="web-apps" id="web-apps">
+  <div class="web-apps-inner">
+    <div class="section-eyebrow">Web Applications</div>
+    <div class="section-title">Built For Teams That <span>Move Fast</span></div>
+
+    <div class="product-showcase">
+
+      <!-- Left: product intro -->
+      <div class="ps-left">
+        <div class="ps-live">
+          <span class="ps-live-dot"></span> Live Now
+        </div>
+        <div class="ps-name">CODEROOM</div>
+        <div class="ps-tagline">Real-Time Collaborative IDE</div>
+        <p class="ps-desc">
+          Your team writes, runs, and reviews code — simultaneously, conflict-free.
+          Share a link. Start coding. No accounts, no downloads, no drama.
+        </p>
+        <div class="ps-pills">
+          <span class="ps-pill">19 Languages</span>
+          <span class="ps-pill">Live Cursors</span>
+          <span class="ps-pill">Zero Setup</span>
+          <span class="ps-pill">Free to Start</span>
+        </div>
+        <a href="https://coderoom-1qr2.onrender.com" target="_blank" rel="noopener" class="ps-cta">
+          Try CodeRoom Free →
+        </a>
+      </div>
+
+      <!-- Right: features -->
+      <div class="ps-right">
+        <div class="ps-feature">
+          <div class="ps-feature-title">Instant Rooms</div>
+          <div class="ps-feature-desc">Create a room in one click, share the link. Your team joins in seconds — no sign-up, no install required.</div>
+        </div>
+        <div class="ps-feature">
+          <div class="ps-feature-title">Zero Conflict Sync</div>
+          <div class="ps-feature-desc">Powered by Yjs CRDT — every keystroke syncs instantly with no merge conflicts, even on flaky connections.</div>
+        </div>
+        <div class="ps-feature">
+          <div class="ps-feature-title">Run Any Language</div>
+          <div class="ps-feature-desc">Python, Java, Go, Rust, Ruby and 14 more — execute right in the browser. No config. No installs.</div>
+        </div>
+        <div class="ps-feature">
+          <div class="ps-feature-title">Live Presence</div>
+          <div class="ps-feature-desc">See who's typing and exactly where — real-time cursors with collaborator names. Always know who's in the room.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
