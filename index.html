@@ -143,16 +143,17 @@
     transition: transform 0.2s;
     flex-shrink: 0;
   }
-  .has-dropdown:hover > a { color: var(--white); }
-  .has-dropdown:hover > a svg { transform: rotate(180deg); }
+  .has-dropdown > a { color: var(--muted); }
+  .has-dropdown.active > a { color: var(--white); }
+  .has-dropdown.active > a svg { transform: rotate(180deg); }
 
   .nav-dropdown {
     position: absolute;
-    top: calc(100% + 20px);
+    top: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%) translateY(-6px);
     min-width: 240px;
-    background: rgba(6,10,16,0.97);
+    background: rgba(6,10,16,0.98);
     backdrop-filter: blur(24px);
     border: 1px solid var(--border);
     z-index: 300;
@@ -168,7 +169,7 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--blue), transparent);
   }
-  .has-dropdown:hover .nav-dropdown {
+  .has-dropdown.active .nav-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -1504,60 +1505,6 @@
   </div>
 </section>
 
-<!-- ── WEB APPLICATIONS ── -->
-<section class="web-apps" id="web-apps">
-  <div class="web-apps-inner">
-    <div class="section-eyebrow">Web Applications</div>
-    <div class="section-title">Built For Teams That <span>Move Fast</span></div>
-
-    <div class="product-showcase">
-
-      <!-- Left: product intro -->
-      <div class="ps-left">
-        <div class="ps-live">
-          <span class="ps-live-dot"></span> Live Now
-        </div>
-        <div class="ps-name">CODEROOM</div>
-        <div class="ps-tagline">Real-Time Collaborative IDE</div>
-        <p class="ps-desc">
-          Your team writes, runs, and reviews code — simultaneously, conflict-free.
-          Share a link. Start coding. No accounts, no downloads, no drama.
-        </p>
-        <div class="ps-pills">
-          <span class="ps-pill">19 Languages</span>
-          <span class="ps-pill">Live Cursors</span>
-          <span class="ps-pill">Zero Setup</span>
-          <span class="ps-pill">Free to Start</span>
-        </div>
-        <a href="https://coderoom-1qr2.onrender.com" target="_blank" rel="noopener" class="ps-cta">
-          Try CodeRoom Free →
-        </a>
-      </div>
-
-      <!-- Right: features -->
-      <div class="ps-right">
-        <div class="ps-feature">
-          <div class="ps-feature-title">Instant Rooms</div>
-          <div class="ps-feature-desc">Create a room in one click, share the link. Your team joins in seconds — no sign-up, no install required.</div>
-        </div>
-        <div class="ps-feature">
-          <div class="ps-feature-title">Zero Conflict Sync</div>
-          <div class="ps-feature-desc">Powered by Yjs CRDT — every keystroke syncs instantly with no merge conflicts, even on flaky connections.</div>
-        </div>
-        <div class="ps-feature">
-          <div class="ps-feature-title">Run Any Language</div>
-          <div class="ps-feature-desc">Python, Java, Go, Rust, Ruby and 14 more — execute right in the browser. No config. No installs.</div>
-        </div>
-        <div class="ps-feature">
-          <div class="ps-feature-title">Live Presence</div>
-          <div class="ps-feature-desc">See who's typing and exactly where — real-time cursors with collaborator names. Always know who's in the room.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ── CTA ── -->
 <section class="cta-section">
   <h2 class="cta-title">Ready To Enter <span>Orbit?</span></h2>
@@ -1639,6 +1586,25 @@
   navOverlay.addEventListener('click', closeMenu);
   document.getElementById('mobileNavClose').addEventListener('click', closeMenu);
   mobileNav.querySelectorAll('a, .mobile-nav-cta').forEach(el => el.addEventListener('click', closeMenu));
+
+  // ── Desktop dropdown (click-based) ──
+  document.querySelectorAll('.has-dropdown > a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const li = link.parentElement;
+      const isActive = li.classList.contains('active');
+      document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('active'));
+      if (!isActive) li.classList.add('active');
+    });
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.has-dropdown')) {
+      document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('active'));
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('active'));
+  });
 
   // ── Mobile nav accordion ──
   document.querySelectorAll('.mnc-toggle').forEach(btn => {
