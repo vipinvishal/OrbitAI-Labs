@@ -1610,7 +1610,7 @@
   <!-- Stats -->
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-num">5<span>+</span></div>
       <div class="stat-label">AI Products</div>
     </div>
     <div class="stat">
@@ -1795,7 +1795,13 @@
   const PRODUCTS = [
     {
       category: 'Chrome Extension',
-      items: []   // add products here when ready
+      items: [
+        {
+          name: 'GrabText',
+          desc: 'Select any area on screen and instantly copy the text — from videos, PDFs, images, or any webpage. Works offline, supports 10+ languages, zero data collection. Press Ctrl+Shift+S and drag to grab.',
+          url: 'https://chromewebstore.google.com/detail/grabtext/ljbmiicemlpglpflkgicgjmnjnaldhbc'
+        }
+      ]
     },
     {
       category: 'Mobile Apps',
@@ -2031,7 +2037,7 @@
 
   // ── Animate stats on scroll ──
   const stats = document.querySelectorAll('.stat-num');
-  const targets = [4, 4, 100, 2026];
+  const targets = [5, 4, 100, 2026];
   const formats = ['+', '', '%', ''];
 
   const observer = new IntersectionObserver(entries => {
