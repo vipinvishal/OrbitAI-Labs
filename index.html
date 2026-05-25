@@ -1610,20 +1610,20 @@
   <!-- Stats -->
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-num">4<span>+</span></div>
       <div class="stat-label">AI Products</div>
     </div>
     <div class="stat">
-      <div class="stat-num">50<span>K+</span></div>
-      <div class="stat-label">Users</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">4<span>.8★</span></div>
-      <div class="stat-label">App Rating</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-num">4</div>
       <div class="stat-label">Platforms</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Free To Start</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2026</div>
+      <div class="stat-label">Founded</div>
     </div>
   </div>
 
@@ -2031,8 +2031,8 @@
 
   // ── Animate stats on scroll ──
   const stats = document.querySelectorAll('.stat-num');
-  const targets = [12, 50000, 4.8, 3];
-  const formats = ['+', 'K+', '★', '+'];
+  const targets = [4, 4, 100, 2026];
+  const formats = ['+', '', '%', ''];
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -2041,12 +2041,10 @@
           const target = targets[i];
           const suffix = formats[i];
           let current = 0;
-          const step = target / 40;
+          const step = Math.max(target / 40, 1);
           const interval = setInterval(() => {
             current = Math.min(current + step, target);
-            const display = target < 10 ? current.toFixed(1) : Math.floor(current);
-            const display2 = i === 1 ? Math.floor(current / 1000) : display;
-            el.innerHTML = display2 + `<span>${suffix}</span>`;
+            el.innerHTML = Math.floor(current) + `<span>${suffix}</span>`;
             if (current >= target) clearInterval(interval);
           }, 30);
         });
