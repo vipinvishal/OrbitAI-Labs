@@ -1622,7 +1622,7 @@
   <!-- Stats -->
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">6<span>+</span></div>
+      <div class="stat-num">7<span>+</span></div>
       <div class="stat-label">AI Products</div>
     </div>
     <div class="stat">
@@ -1852,6 +1852,11 @@
           name: 'Auto Carousel Agent',
           desc: 'Monitors trending AI & tech stories from Hacker News and Reddit, uses Claude AI to generate scroll-stopping Instagram carousel slides, and emails you ready-to-post PNGs — runs automatically via GitHub Actions every 2 days.',
           url: 'https://github.com/vipinvishal/Auto-carousel-agent'
+        },
+        {
+          name: 'Auto Infographics System',
+          desc: 'Every day, GitHub Actions finds a trending AI / GenAI / Agentic-AI topic, turns it into a branded hand-drawn-style infographic PNG, writes a copy-paste caption, and emails both to you. No server, no manual work.',
+          url: 'https://github.com/vipinvishal/Auto_infographics_system'
         }
         // add more AI automation products here
       ]
@@ -2084,7 +2089,7 @@
 
   // ── Animate stats on scroll ──
   const stats = document.querySelectorAll('.stat-num');
-  const targets = [6, 4, 100, 2026];
+  const targets = [7, 4, 100, 2026];
   const formats = ['+', '', '%', ''];
 
   const observer = new IntersectionObserver(entries => {
