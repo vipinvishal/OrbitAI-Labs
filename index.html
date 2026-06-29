@@ -158,18 +158,20 @@
 
   .nav-dropdown {
     position: absolute;
-    top: 100%;           /* flush — no gap, padding-bottom above bridges it */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(-4px);
     min-width: 240px;
     background: rgba(6,10,16,0.98);
     backdrop-filter: blur(24px);
     border: 1px solid var(--border);
+    border-radius: 12px;
     z-index: 300;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
     pointer-events: none;
+    overflow: hidden;
   }
   .nav-dropdown::before {
     content: '';
@@ -184,7 +186,10 @@
     transform: translateX(-50%) translateY(0);
     pointer-events: all;
   }
-
+  /* Wide mega-menu for categories with many items */
+  .nav-dropdown.nd-multi {
+    width: 480px;
+  }
   .nd-label {
     font-size: 9px;
     letter-spacing: 3px;
@@ -193,28 +198,38 @@
     padding: 12px 16px 8px;
     border-bottom: 1px solid var(--border);
   }
+  /* Grid wrapper for multi-item dropdowns */
+  .nd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 8px;
+  }
   .nd-item {
     display: block;
-    padding: 14px 16px;
+    padding: 10px 12px;
     text-decoration: none;
+    border-radius: 8px;
     transition: background 0.15s;
     cursor: pointer;
   }
-  .nd-item:hover { background: rgba(0,153,255,0.07); }
+  .nd-item:hover { background: rgba(0,153,255,0.09); }
+  .nd-item:hover .nd-item-name { color: var(--blue); }
   .nd-item-name {
     font-family: system-ui, -apple-system, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     color: var(--white);
     margin-bottom: 3px;
     text-transform: uppercase;
+    transition: color 0.15s;
   }
   .nd-item-desc {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--muted);
-    letter-spacing: 0.3px;
-    line-height: 1.5;
+    letter-spacing: 0.2px;
+    line-height: 1.45;
   }
   .nd-coming {
     display: block;
@@ -1895,14 +1910,21 @@
       s.textContent = 'Coming Soon';
       dropdown.appendChild(s);
     } else {
+      const multi = cat.items.length > 3;
+      if (multi) dropdown.classList.add('nd-multi');
+      const wrapper = multi ? document.createElement('div') : dropdown;
+      if (multi) { wrapper.className = 'nd-grid'; dropdown.appendChild(wrapper); }
       cat.items.forEach(item => {
         const a = document.createElement('a');
         a.href = item.url;
         a.target = '_blank';
         a.rel = 'noopener';
         a.className = 'nd-item';
-        a.innerHTML = `<div class="nd-item-name">${item.name}</div><div class="nd-item-desc">${item.desc.split('.')[0]}.</div>`;
-        dropdown.appendChild(a);
+        // short tagline: first sentence, capped at 52 chars
+        const first = item.desc.split('.')[0];
+        const tagline = first.length > 52 ? first.substring(0, 52) + '…' : first + '.';
+        a.innerHTML = `<div class="nd-item-name">${item.name}</div><div class="nd-item-desc">${tagline}</div>`;
+        wrapper.appendChild(a);
       });
     }
   });
